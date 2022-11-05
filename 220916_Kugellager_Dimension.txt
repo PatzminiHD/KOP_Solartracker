@@ -1,0 +1,4 @@
+Ausendurchmesser: 22mm
+Innendurchmesser: 8mm
+
+Dicke: 7mm
