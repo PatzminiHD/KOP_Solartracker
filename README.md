@@ -12,3 +12,11 @@ Here we design the idea for one of our school projects, a solartracker.
 - 1x [Solarcell](https://www.conrad.at/de/p/sol-expert-sm2380-sm2380-solarmodul-190469.html "Link")
 - 2x [Servo](https://www.conrad.at/de/p/reely-midi-servo-analog-servo-getriebe-material-plastik-stecksystem-jr-2144550.html?searchType=SearchRedirect "Link")
 - 4x [Light Depending Resistor](https://www.conrad.at/de/p/luna-optoelectronics-pdv-p8103-fotowiderstand-ldr-tht-1-st-150-v-max-l-x-b-x-h-4-29-x-5-08-x-2-mm-1762910.html?searchType=SearchRedirect "Link")
+
+
+### TODO
+- Rethink positioning of LDRs
+- Draw locking ring for Main Axle
+- Servo Attachment in Bottom Box
+- Mounting points for Cables
+- Bottom Box rethink/remake
