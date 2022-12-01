@@ -90,4 +90,29 @@ void loop() {
       Mode = 0;
     }
   }
+  prevButton = currButton;
+  WriteModeToLCD();
+}
+
+
+//Method to write the current Operation Mode to the LCD
+void WriteModeToLCD()
+{
+  lcd.setCursor(0, 0);
+  lcd.print("Mode: ");
+  switch(Mode)
+  {
+    case 0:
+      lcd.write(0);
+      break;
+    case 1:
+      lcd.write(1);
+      break;
+    case 2:
+      lcd.write(2);
+      break;
+    case 3:
+      lcd.write(3);
+      break;
+  }
 }
