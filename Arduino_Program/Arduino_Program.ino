@@ -1,3 +1,4 @@
+#include <SPI.h>
 #include <Servo.h>
 #include <LiquidCrystal_I2C.h>
 LiquidCrystal_I2C lcd(0x27,20,4);
@@ -11,7 +12,10 @@ const int ServoLowerPin = 5;
 const int MCP3008_cs = 10;
 const int ModeButton = 8;
 
-bool prevSwitch = false;
+bool prevButton = false;
+bool currButton = false;
+
+int Mode = 0;
 
 byte ModeOff[] = {
   B01110,
@@ -58,8 +62,8 @@ void setup() {
   Serial.begin(9600);
   lcd.init();
   lcd.backlight();
-  ServerLower.attach(ServoLowerPin);
-  ServerUpper.attach(ServoUpperPin);
+  ServoLower.attach(ServoLowerPin);
+  ServoUpper.attach(ServoUpperPin);
   
   pinMode(MCP3008_cs, OUTPUT);
   pinMode(ModeButton, INPUT);
@@ -72,5 +76,18 @@ void setup() {
 }
 
 void loop() {
-  
+  //Mode 0 = Off
+  //Mode 1 = Auto
+  //Mode 2 = Manual Lower
+  //Mode 3 = Manual Upper
+  currButton = digitalRead(ModeButton);
+  if(currButton == true && prevButton == false)
+  {
+    Mode++;
+
+    if(Mode > 3)
+    {
+      Mode = 0;
+    }
+  }
 }
