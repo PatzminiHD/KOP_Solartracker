@@ -105,6 +105,16 @@ void loop() {
   WriteModeToLCD();
 }
 
+//Read analog value from ADC (MCP3008)
+uint16_t mcp3008_read(uint8_t channel) {
+  digitalWrite(CS, LOW);
+  SPI.transfer(0x01);
+  uint8_t msb = SPI.transfer(0x80 + (channel << 4));
+  uint8_t lsb = SPI.transfer(0x00);
+  digitalWrite(CS, HIGH);
+  return ((msb & 0x03) << 8) + lsb;
+}
+
 
 //Method to write the current Operation Mode to the LCD
 void WriteModeToLCD()
