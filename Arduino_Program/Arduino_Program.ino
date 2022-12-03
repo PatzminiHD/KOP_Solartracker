@@ -8,6 +8,10 @@ Servo ServoLower;
 
 const int ServoUpperPin = 6;
 const int ServoLowerPin = 5;
+int ServoUpperValue = 0;
+int ServoLowerValue = 0;
+int ServoUpperMaxValue = 0;
+int ServoUpperMinValue = 0;
 
 const int MCP3008_cs = 10;
 const int ModeButton = 8;
@@ -103,6 +107,55 @@ void loop() {
   }
   prevButton = currButton;
   WriteModeToLCD();
+
+  switch(Mode)
+  {
+    //Mode Off
+    case 0:
+      ModeOff();
+      break;
+      
+    //Mode Auto
+    case 1:
+      ModeAuto();
+      break;
+
+    //Mode Manual Lower
+    case 2:
+      ModeManLower();
+      break;
+
+    //Mode Manual Upper
+    case 3:
+      ModeManUpper();
+      break;
+  }
+  
+}
+
+void ModeOff()
+{
+  
+}
+
+void ModeAuto()
+{
+  
+}
+
+void ModeManLower()
+{
+  
+}
+
+void ModeManUpper()
+{
+  
+}
+
+void WriteInfoToLCD()
+{
+  
 }
 
 //Read analog value from ADC (MCP3008)
