@@ -1,7 +1,7 @@
 #include <SPI.h>
 #include <Servo.h>
 #include <LiquidCrystal_I2C.h>
-LiquidCrystal_I2C lcd(0x27,20,4);
+LiquidCrystal_I2C lcd(0x27, 20, 4);
 
 Servo ServoUpper;
 Servo ServoLower;
@@ -10,8 +10,10 @@ const int ServoUpperPin = 6;
 const int ServoLowerPin = 5;
 int ServoUpperValue = 0;
 int ServoLowerValue = 0;
-int ServoUpperMaxValue = 0;
-int ServoUpperMinValue = 0;
+const int ServoUpperMaxValue = 160;
+const int ServoUpperMinValue = 30;
+const int ServoLowerMaxValue = 160;
+const int ServoLowerMinValue = 0;
 
 const int MCP3008_cs = 10;
 const int ModeButton = 8;
@@ -32,7 +34,7 @@ bool currButton = false;
 
 int Mode = 0;
 
-byte ModeOff[] = {
+byte ModeOffChar[] = {
   B01110,
   B10001,
   B10001,
@@ -42,7 +44,7 @@ byte ModeOff[] = {
   B10001,
   B01110
 };
-byte ModeLower[] = {
+byte ModeLowerChar[] = {
   B00100,
   B00100,
   B00100,
@@ -52,7 +54,7 @@ byte ModeLower[] = {
   B00000,
   B00000
 };
-byte ModeUpper[] = {
+byte ModeUpperChar[] = {
   B00000,
   B00000,
   B00100,
@@ -62,7 +64,7 @@ byte ModeUpper[] = {
   B00100,
   B00100
 };
-byte ModeAuto[] = {
+byte ModeAutoChar[] = {
   B00000,
   B01110,
   B10001,
@@ -73,21 +75,33 @@ byte ModeAuto[] = {
   B10001
 };
 
+byte degree[] = {
+  B01100,
+  B10010,
+  B10010,
+  B01100,
+  B00000,
+  B00000,
+  B00000,
+  B00000
+};
+
 void setup() {
   Serial.begin(9600);
   lcd.init();
   lcd.backlight();
   ServoLower.attach(ServoLowerPin);
   ServoUpper.attach(ServoUpperPin);
-  
+
   pinMode(MCP3008_cs, OUTPUT);
   pinMode(ModeButton, INPUT);
   digitalWrite(MCP3008_cs, HIGH);
-  lcd.createChar(0, ModeOff);
-  lcd.createChar(1, ModeAuto);
-  lcd.createChar(2, ModeLower);
-  lcd.createChar(3, ModeUpper);
-  
+  lcd.createChar(0, ModeOffChar);
+  lcd.createChar(1, ModeAutoChar);
+  lcd.createChar(2, ModeLowerChar);
+  lcd.createChar(3, ModeUpperChar);
+  lcd.createChar(4, degree);
+
 }
 
 void loop() {
@@ -96,25 +110,24 @@ void loop() {
   //Mode 2 = Manual Lower
   //Mode 3 = Manual Upper
   currButton = digitalRead(ModeButton);
-  if(currButton == true && prevButton == false)
+  if (currButton == true && prevButton == false)
   {
     Mode++;
 
-    if(Mode > 3)
+    if (Mode > 3)
     {
       Mode = 0;
     }
   }
   prevButton = currButton;
-  WriteModeToLCD();
 
-  switch(Mode)
+  switch (Mode)
   {
     //Mode Off
     case 0:
       ModeOff();
       break;
-      
+
     //Mode Auto
     case 1:
       ModeAuto();
@@ -130,41 +143,79 @@ void loop() {
       ModeManUpper();
       break;
   }
-  
+  SetServos();
+  WriteInfoToLCD();
 }
 
 void ModeOff()
 {
-  
+  ServoLowerValue = 90;
+  ServoUpperValue = 90;
 }
 
 void ModeAuto()
 {
-  
+
 }
 
 void ModeManLower()
 {
-  
+  ServoLowerValue--;
 }
 
 void ModeManUpper()
 {
-  
+  ServoLowerValue++;
 }
 
 void WriteInfoToLCD()
 {
-  
+  WriteModeToLCD();
+  lcd.setCursor(0, 1);
+  lcd.print("SrvLwr: ");
+  lcd.print(ServoLowerValue);
+  lcd.write(4);
+  lcd.print("  ");
+
+  lcd.setCursor(0, 2);
+  lcd.print("SrvUpr: ");
+  lcd.print(ServoUpperValue);
+  lcd.write(4);
+  lcd.print("  ");
+}
+
+void SetServos()
+{
+  //Cap Value of Upper Servo
+  if (ServoUpperValue > ServoUpperMaxValue)
+  {
+    ServoUpperValue = ServoUpperMaxValue;
+  }
+  if (ServoUpperValue < ServoUpperMinValue)
+  {
+    ServoUpperValue = ServoUpperMinValue;
+  }
+
+  //Cap Value of Lower Servo
+  if (ServoLowerValue > ServoLowerMaxValue)
+  {
+    ServoLowerValue = ServoLowerMaxValue;
+  }
+  if (ServoLowerValue < ServoLowerMinValue)
+  {
+    ServoLowerValue = ServoLowerMinValue;
+  }
+  ServoLower.write(ServoLowerValue);
+  ServoUpper.write(ServoUpperValue);
 }
 
 //Read analog value from ADC (MCP3008)
 uint16_t mcp3008_read(uint8_t channel) {
-  digitalWrite(CS, LOW);
+  digitalWrite(MCP3008_cs, LOW);
   SPI.transfer(0x01);
   uint8_t msb = SPI.transfer(0x80 + (channel << 4));
   uint8_t lsb = SPI.transfer(0x00);
-  digitalWrite(CS, HIGH);
+  digitalWrite(MCP3008_cs, HIGH);
   return ((msb & 0x03) << 8) + lsb;
 }
 
@@ -174,7 +225,7 @@ void WriteModeToLCD()
 {
   lcd.setCursor(0, 0);
   lcd.print("Mode: ");
-  switch(Mode)
+  switch (Mode)
   {
     case 0:
       lcd.write(0);
