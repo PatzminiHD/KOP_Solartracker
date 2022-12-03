@@ -12,6 +12,17 @@ const int ServoLowerPin = 5;
 const int MCP3008_cs = 10;
 const int ModeButton = 8;
 
+
+//Pins on the ADC
+const int LCR0Pin = 0;
+const int LCR1Pin = 1;
+const int LCR2Pin = 2;
+const int LCR3Pin = 3;
+
+//Pins on the ADC
+const int VsolarPin = 4;
+const int PotiPin = 5;
+
 bool prevButton = false;
 bool currButton = false;
 
