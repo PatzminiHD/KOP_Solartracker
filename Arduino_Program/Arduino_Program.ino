@@ -3,39 +3,60 @@
 #include <LiquidCrystal_I2C.h>
 LiquidCrystal_I2C lcd(0x27, 20, 4);
 
+//Initialise Servos
 Servo ServoUpper;
 Servo ServoLower;
 
+//Servo Pins on Arduino
 const int ServoUpperPin = 6;
 const int ServoLowerPin = 5;
+
+//Global Servo Values
 int ServoUpperValue = 0;
 int ServoLowerValue = 0;
-const int ServoUpperMaxValue = 180;
+
+//Global Mode Value
+//Mode 0 = Off
+//Mode 1 = Auto
+//Mode 2 = Manual Lower
+//Mode 3 = Manual Upper
+int Mode = 0;
+
+//Maximum and Minimum Values for the Servos
+const int ServoUpperMaxValue = 160;
 const int ServoUpperMinValue = 30;
 const int ServoLowerMaxValue = 180;
 const int ServoLowerMinValue = 0;
 
+//Chip Select Pin for the ADC
 const int MCP3008_cs = 10;
+
+//Mode Button Pin on Arduino
 const int ModeButton = 8;
 
-//Pins on the ADC
+//Solar Voltage Pin on the ADC
+const int VsolarPin = 4;
+
+//Potentiometer Pin on the ADC
+const int PotiPin = 5;
+
+//Light Depending Resistor Pins on the ADC
 const int LCR0Pin = 0;
 const int LCR1Pin = 1;
 const int LCR2Pin = 2;
 const int LCR3Pin = 3;
 
+//Threshold Value for Automatic Mode
 const int ThresholdValue = 20;
-const int ServoSteps = 1;
 
-//Pins on the ADC
-const int VsolarPin = 4;
-const int PotiPin = 5;
+//Servo Steps for Automatic Mode
+const int ServoSteps = 1;
 
 bool prevButton = false;
 bool currButton = false;
 
-int Mode = 0;
 
+//==========|Custom Characters|==========
 byte ModeOffChar[] = {
   B01110,
   B10001,
@@ -88,16 +109,29 @@ byte degree[] = {
   B00000
 };
 
+//==========|Setup Method|==========
 void setup() {
+
+  //Begin Serial Communication for Debugging
   Serial.begin(9600);
+
+  //Initialise LCD
   lcd.init();
+  //Turn on lcd backlight
   lcd.backlight();
+
+  //Attach Servos
   ServoLower.attach(ServoLowerPin);
   ServoUpper.attach(ServoUpperPin);
 
+  //Set PinMode
   pinMode(MCP3008_cs, OUTPUT);
-  pinMode(ModeButton, INPUT);
+  pinMode(ModeButton, INPUT_PULLUP);
+
+  //Set ChipSelect Pin of ADC High (Pin is active Low)
   digitalWrite(MCP3008_cs, HIGH);
+
+  //Create Custom Characters
   lcd.createChar(0, ModeOffChar);
   lcd.createChar(1, ModeAutoChar);
   lcd.createChar(2, ModeLowerChar);
@@ -106,13 +140,11 @@ void setup() {
 
 }
 
+//==========|Setup Method|==========
 void loop() {
-  //Mode 0 = Off
-  //Mode 1 = Auto
-  //Mode 2 = Manual Lower
-  //Mode 3 = Manual Upper
+  //Check if Button is Pressed
   currButton = digitalRead(ModeButton);
-  if (currButton == true && prevButton == false)
+  if (currButton == false && prevButton == true)
   {
     Mode++;
 
@@ -123,6 +155,7 @@ void loop() {
   }
   prevButton = currButton;
 
+  //Execute Depending on Mode
   switch (Mode)
   {
     //Mode Off
@@ -145,23 +178,31 @@ void loop() {
       ModeManUpper();
       break;
   }
+
+  //Set Servos to their values
   SetServos();
+  //Write Information to LCD
   WriteInfoToLCD();
 }
 
+//==========|Mode Off Method|==========
 void ModeOff()
 {
+  //Set both Servos to 90°
   ServoLowerValue = 90;
   ServoUpperValue = 90;
 }
 
+//==========|Mode Auto Method|==========
 void ModeAuto()
 {
+    //Read values of LDRs
     int LDR0Value = mcp3008_read(LCR0Pin);
     int LDR1Value = mcp3008_read(LCR1Pin);
     int LDR2Value = mcp3008_read(LCR2Pin);
     int LDR3Value = mcp3008_read(LCR3Pin);
 
+    //Compare LDR Values for Upper Servo
     if(LDR0Value - ThresholdValue > LDR2Value)
     {
       ServoUpperValue += ServoSteps;
@@ -171,6 +212,7 @@ void ModeAuto()
       ServoUpperValue -= ServoSteps;
     }
 
+    //Compare LDR Values for Lower Servo
     if(LDR1Value - ThresholdValue > LDR3Value)
     {
       ServoLowerValue += ServoSteps;
@@ -181,42 +223,56 @@ void ModeAuto()
     }
 }
 
+//==========|Mode Manual Lower Servo Method|==========
 void ModeManLower()
 {
+  //Read Potentiometer Value
   int PotiValue = mcp3008_read(PotiPin);
+  //Set Servo according to Potentiometer Value
   ServoLowerValue = map(PotiValue, 0, 1023, 0, 180);
 }
 
+//==========|Mode Manual Upper Servo Method|==========
 void ModeManUpper()
 {
+  //Read Potentiometer Value
   int PotiValue = mcp3008_read(PotiPin);
+  //Set Servo according to Potentiometer Value
   ServoUpperValue = map(PotiValue, 0, 1023, 0, 180);
 }
 
+//==========|Write Info to LCD Method|==========
 void WriteInfoToLCD()
 {
+  //Read and convert Voltage of Solar Cell
   int VsolarValue = mcp3008_read(VsolarPin);
   VsolarValue = map(VsolarValue, 0, 1023, 0, 5000);
 
+  //Write Mode
   WriteModeToLCD();
+
+  //Write Lower Servo Angle
   lcd.setCursor(0, 1);
   lcd.print("SrvLwr: ");
   lcd.print(ServoLowerValue);
   lcd.write(4);
   lcd.print("   ");
 
+  //Write Upper Servo Angle
   lcd.setCursor(0, 2);
   lcd.print("SrvUpr: ");
   lcd.print(ServoUpperValue);
   lcd.write(4);
   lcd.print("   ");
 
+  //Write Voltage of Solar Cell
   lcd.setCursor(0, 3);
   lcd.print("Vsolar= ");
   lcd.print(VsolarValue);
   lcd.print("mV      ");
 }
 
+//==========|Set Servos|==========
 void SetServos()
 {
   //Cap Value of Upper Servo
@@ -238,26 +294,40 @@ void SetServos()
   {
     ServoLowerValue = ServoLowerMinValue;
   }
+
+  //Write Values to Servos
   ServoLower.write(ServoLowerValue);
   ServoUpper.write(ServoUpperValue);
 }
 
 //Read analog value from ADC (MCP3008)
 uint16_t mcp3008_read(uint8_t channel) {
+  //Set ChipSelect LOW
   digitalWrite(MCP3008_cs, LOW);
+
+  //Start SPI Transfer
   SPI.transfer(0x01);
+
+  //Transfer Value
   uint8_t msb = SPI.transfer(0x80 + (channel << 4));
   uint8_t lsb = SPI.transfer(0x00);
+
+  //Set ChipSelect HIGH
   digitalWrite(MCP3008_cs, HIGH);
+
+  //Return read value
   return ((msb & 0x03) << 8) + lsb;
 }
 
 
-//Method to write the current Operation Mode to the LCD
+//==========|Write Mode to LCD Method|==========
 void WriteModeToLCD()
 {
+  //Set Cursor Position to top left
   lcd.setCursor(0, 0);
   lcd.print("Mode: ");
+
+  //Write Custom Character Depending on Mode
   switch (Mode)
   {
     case 0:
