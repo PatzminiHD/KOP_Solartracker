@@ -10,20 +10,22 @@ const int ServoUpperPin = 6;
 const int ServoLowerPin = 5;
 int ServoUpperValue = 0;
 int ServoLowerValue = 0;
-const int ServoUpperMaxValue = 160;
+const int ServoUpperMaxValue = 180;
 const int ServoUpperMinValue = 30;
-const int ServoLowerMaxValue = 160;
+const int ServoLowerMaxValue = 180;
 const int ServoLowerMinValue = 0;
 
 const int MCP3008_cs = 10;
 const int ModeButton = 8;
-
 
 //Pins on the ADC
 const int LCR0Pin = 0;
 const int LCR1Pin = 1;
 const int LCR2Pin = 2;
 const int LCR3Pin = 3;
+
+const int ThresholdValue = 20;
+const int ServoSteps = 1;
 
 //Pins on the ADC
 const int VsolarPin = 4;
@@ -155,33 +157,64 @@ void ModeOff()
 
 void ModeAuto()
 {
+    int LDR0Value = mcp3008_read(LCR0Pin);
+    int LDR1Value = mcp3008_read(LCR1Pin);
+    int LDR2Value = mcp3008_read(LCR2Pin);
+    int LDR3Value = mcp3008_read(LCR3Pin);
 
+    if(LDR0Value - ThresholdValue > LDR2Value)
+    {
+      ServoUpperValue += ServoSteps;
+    }
+    else if(LDR2Value - ThresholdValue > LDR0Value)
+    {
+      ServoUpperValue -= ServoSteps;
+    }
+
+    if(LDR1Value - ThresholdValue > LDR3Value)
+    {
+      ServoLowerValue += ServoSteps;
+    }
+    else if(LDR3Value - ThresholdValue > LDR1Value)
+    {
+      ServoUpperValue -= ServoSteps;
+    }
 }
 
 void ModeManLower()
 {
-  ServoLowerValue--;
+  int PotiValue = mcp3008_read(PotiPin);
+  ServoLowerValue = map(PotiValue, 0, 1023, 0, 180);
 }
 
 void ModeManUpper()
 {
-  ServoLowerValue++;
+  int PotiValue = mcp3008_read(PotiPin);
+  ServoUpperValue = map(PotiValue, 0, 1023, 0, 180);
 }
 
 void WriteInfoToLCD()
 {
+  int VsolarValue = mcp3008_read(VsolarPin);
+  VsolarValue = map(VsolarValue, 0, 1023, 0, 5000);
+
   WriteModeToLCD();
   lcd.setCursor(0, 1);
   lcd.print("SrvLwr: ");
   lcd.print(ServoLowerValue);
   lcd.write(4);
-  lcd.print("  ");
+  lcd.print("   ");
 
   lcd.setCursor(0, 2);
   lcd.print("SrvUpr: ");
   lcd.print(ServoUpperValue);
   lcd.write(4);
-  lcd.print("  ");
+  lcd.print("   ");
+
+  lcd.setCursor(0, 3);
+  lcd.print("Vsolar= ");
+  lcd.print(VsolarValue);
+  lcd.print("mV      ");
 }
 
 void SetServos()
