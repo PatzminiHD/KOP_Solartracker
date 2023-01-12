@@ -20,3 +20,5 @@ Here we design the idea for one of our school projects, a solartracker.
 - Servo Attachment in Bottom Box
 - Mounting points for Cables
 - Bottom Box rethink/remake
+- Add LED to PSU
+- Add Walls to LDR Mount
