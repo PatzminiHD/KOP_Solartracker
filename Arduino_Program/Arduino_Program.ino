@@ -302,16 +302,20 @@ void SetServos()
 
 //Read analog value from ADC (MCP3008)
 uint16_t mcp3008_read(uint8_t channel) {
+  lcd.println("Starting Transfer");
   //Set ChipSelect LOW
   digitalWrite(MCP3008_cs, LOW);
 
+  lcd.println("Transfering");
   //Start SPI Transfer
   SPI.transfer(0x01);
 
+  lcd.println("Getting Values");
   //Transfer Value
   uint8_t msb = SPI.transfer(0x80 + (channel << 4));
   uint8_t lsb = SPI.transfer(0x00);
 
+  lcd.println("Unselecting Chip");
   //Set ChipSelect HIGH
   digitalWrite(MCP3008_cs, HIGH);
 
