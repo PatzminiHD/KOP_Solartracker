@@ -15,10 +15,13 @@ Here we design the idea for one of our school projects, a solartracker.
 
 
 ### TODO
-- Rethink positioning of LDRs
-- Draw locking ring for Main Axle
+- ~~Rethink positioning of LDRs~~
+- ~~Draw locking ring for Main Axle~~
 - Servo Attachment in Bottom Box
+- Draw Case removeable Wall
+- Add Side Box Attachments
+- add Audio Port to the Case
 - Mounting points for Cables
 - Bottom Box rethink/remake
-- Add LED to PSU
-- Add Walls to LDR Mount
+- ~~Add LED to PSU~~
+- ~~Add Walls to LDR Mount~~
