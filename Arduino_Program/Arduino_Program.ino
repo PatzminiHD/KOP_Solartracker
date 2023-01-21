@@ -115,6 +115,9 @@ void setup() {
   //Begin Serial Communication for Debugging
   Serial.begin(9600);
 
+  //Beginn Serial Periferal Interface Communication
+  SPI.begin();
+
   //Initialise LCD
   lcd.init();
   //Turn on lcd backlight
@@ -302,20 +305,22 @@ void SetServos()
 
 //Read analog value from ADC (MCP3008)
 uint16_t mcp3008_read(uint8_t channel) {
-  lcd.println("Starting Transfer");
   //Set ChipSelect LOW
+  Serial.print("Reading Pin: ");
+  Serial:println(channel);
   digitalWrite(MCP3008_cs, LOW);
 
-  lcd.println("Transfering");
   //Start SPI Transfer
   SPI.transfer(0x01);
 
-  lcd.println("Getting Values");
   //Transfer Value
   uint8_t msb = SPI.transfer(0x80 + (channel << 4));
   uint8_t lsb = SPI.transfer(0x00);
 
-  lcd.println("Unselecting Chip");
+  Serial.print("MSB is: ");
+  Serial:println(msb);
+  Serial.print("LSB is: ");
+  Serial:println(lsb);
   //Set ChipSelect HIGH
   digitalWrite(MCP3008_cs, HIGH);
 
