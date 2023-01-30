@@ -15,6 +15,7 @@ Here we design the idea for one of our school projects, a solartracker.
 
 
 ### TODO
+- Add Poti
 - Mounting points for Cables
 - Add Side Box Attachments
 - Servo Attachment in Bottom Box
