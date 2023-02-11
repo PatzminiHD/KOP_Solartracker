@@ -307,7 +307,7 @@ void SetServos()
 uint16_t mcp3008_read(uint8_t channel) {
   //Set ChipSelect LOW
   Serial.print("Reading Pin: ");
-  Serial:println(channel);
+  Serial.println(channel);
   digitalWrite(MCP3008_cs, LOW);
 
   //Start SPI Transfer
@@ -318,9 +318,9 @@ uint16_t mcp3008_read(uint8_t channel) {
   uint8_t lsb = SPI.transfer(0x00);
 
   Serial.print("MSB is: ");
-  Serial:println(msb);
+  Serial.println(msb);
   Serial.print("LSB is: ");
-  Serial:println(lsb);
+  Serial.println(lsb);
   //Set ChipSelect HIGH
   digitalWrite(MCP3008_cs, HIGH);
 
