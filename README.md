@@ -15,11 +15,12 @@ Here we design the idea for one of our school projects, a solartracker.
 
 
 ### TODO
-
-- Imbuss-Wormscrew for Locking Ring  
+- add Logos
+- add Imbuss-Wormscrew to asm  
 - Add Poti
-- Mounting points for Cables ->maybe hab i da was beim Drucker ~knorr
-- Add Side Box Attachments
+- ~~Imbuss-Wormscrew for Locking Ring~~
+- ~~Mounting points for Cables~~
+- ~~Add Side Box Attachments~~
 - ~~Servo Attachment in Bottom Box~~
 - ~~Assembley all Screws~~
 - ~~Rethink positioning of LDRs~~
