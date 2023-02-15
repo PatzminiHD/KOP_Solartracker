@@ -1,0 +1,19 @@
+﻿  MODEL 221105_ASSEMBLY_ALL :
+ 
+
+  1 CIRCULAR REFERENCE LOOPS FOUND
+ 
+
+   LOOP #  1
+
+   Depth of loop is 3
+
+Feature number 6 (DATUM PLANE, id = 11574) 
+  in model 221105_ASSEMBLY_ALL refers to:
+
+Feature number 5 (COMPONENT, id = 55) 
+  in model 221124_CASE_ASSEMBLEY refers to:
+
+Feature number 6 (DATUM PLANE, id = 11574) 
+  in model 221105_ASSEMBLY_ALL - circle closed.
+
