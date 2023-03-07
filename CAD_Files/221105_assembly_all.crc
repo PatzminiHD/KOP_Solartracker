@@ -1,19 +1,56 @@
 ﻿  MODEL 221105_ASSEMBLY_ALL :
  
 
-  1 CIRCULAR REFERENCE LOOPS FOUND
+  3 CIRCULAR REFERENCE LOOPS FOUND
  
 
    LOOP #  1
 
-   Depth of loop is 3
+   Depth of loop is 4
 
-Feature number 6 (DATUM PLANE, id = 11574) 
-  in model 221105_ASSEMBLY_ALL refers to:
+Feature number 6 (COMPONENT, id = 48) 
+  in model 230114_PCB_WITH_ARDUUNO refers to:
 
-Feature number 5 (COMPONENT, id = 55) 
-  in model 221124_CASE_ASSEMBLEY refers to:
+Feature number 30 (COMPONENT, id = 84) 
+  in model 999999_ARDUINO_UNO_1 must follow after:
 
-Feature number 6 (DATUM PLANE, id = 11574) 
-  in model 221105_ASSEMBLY_ALL - circle closed.
+Feature number 28 (COMPONENT, id = 80) 
+  in model 999999_ARDUINO_UNO_1 refers to:
+
+Feature number 6 (COMPONENT, id = 48) 
+  in model 230114_PCB_WITH_ARDUUNO - circle closed.
+
+
+   LOOP #  2
+
+   Depth of loop is 4
+
+Feature number 6 (COMPONENT, id = 48) 
+  in model 230114_PCB_WITH_ARDUUNO refers to:
+
+Feature number 47 (COMPONENT, id = 109) 
+  in model 999999_ARDUINO_UNO_1 must follow after:
+
+Feature number 28 (COMPONENT, id = 80) 
+  in model 999999_ARDUINO_UNO_1 refers to:
+
+Feature number 6 (COMPONENT, id = 48) 
+  in model 230114_PCB_WITH_ARDUUNO - circle closed.
+
+
+   LOOP #  3
+
+   Depth of loop is 4
+
+Feature number 6 (COMPONENT, id = 48) 
+  in model 230114_PCB_WITH_ARDUUNO refers to:
+
+Feature number 48 (COMPONENT, id = 111) 
+  in model 999999_ARDUINO_UNO_1 must follow after:
+
+Feature number 28 (COMPONENT, id = 80) 
+  in model 999999_ARDUINO_UNO_1 refers to:
+
+Feature number 6 (COMPONENT, id = 48) 
+  in model 230114_PCB_WITH_ARDUUNO - circle closed.
 
