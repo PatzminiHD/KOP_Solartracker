@@ -15,9 +15,9 @@ Here we design the idea for one of our school projects, a solartracker.
 
 
 ### TODO
-- add Logos
-- add Imbuss-Wormscrew to asm  
-- Add Poti
+- ~~Add Logos~~
+- Add Imbuss-Wormscrew to asm  
+- ~~Add Poti~~
 - ~~Imbuss-Wormscrew for Locking Ring~~
 - ~~Mounting points for Cables~~
 - ~~Add Side Box Attachments~~
@@ -26,7 +26,7 @@ Here we design the idea for one of our school projects, a solartracker.
 - ~~Rethink positioning of LDRs~~
 - ~~Draw locking ring for Main Axle~~
 - ~~Draw Case removeable Wall~~
-- ~~add Audio Port to the Case~~
+- ~~Add Audio Port to the Case~~
 - ~~Bottom Box rethink/remake~~
 - ~~Add LED to PSU~~
 - ~~Add Walls to LDR Mount~~
