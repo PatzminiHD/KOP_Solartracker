@@ -1,19 +1,56 @@
-﻿  MODEL 221105_ASSEMBLY_ALL :
+﻿  Modell 221105_ASSEMBLY_ALL: 
  
 
-  1 CIRCULAR REFERENCE LOOPS FOUND
+  3 Zirkulärer-Bezug-Schleifen gefunden
  
 
-   LOOP #  1
+   Schleife Nr. 1
 
-   Depth of loop is 3
+   Schleifentiefe beträgt 4
 
-Feature number 6 (DATUM PLANE, id = 11574) 
-  in model 221105_ASSEMBLY_ALL refers to:
+KE-Nummer 6 (KOMPONENTE, ID = 48) 
+  in Modell 230114_PCB_WITH_ARDUUNO verweist auf:
 
-Feature number 5 (COMPONENT, id = 55) 
-  in model 221124_CASE_ASSEMBLEY refers to:
+KE-Nummer 30 (KOMPONENTE, ID = 84) 
+  in Modell 999999_ARDUINO_UNO_1 muss folgen nach:
 
-Feature number 6 (DATUM PLANE, id = 11574) 
-  in model 221105_ASSEMBLY_ALL - circle closed.
+KE-Nummer 28 (KOMPONENTE, ID = 80) 
+  in Modell 999999_ARDUINO_UNO_1 verweist auf:
+
+KE-Nummer 6 (KOMPONENTE, ID = 48) 
+  in Modell 230114_PCB_WITH_ARDUUNO - Kreis geschlossen.
+
+
+   Schleife Nr. 2
+
+   Schleifentiefe beträgt 4
+
+KE-Nummer 6 (KOMPONENTE, ID = 48) 
+  in Modell 230114_PCB_WITH_ARDUUNO verweist auf:
+
+KE-Nummer 47 (KOMPONENTE, ID = 109) 
+  in Modell 999999_ARDUINO_UNO_1 muss folgen nach:
+
+KE-Nummer 28 (KOMPONENTE, ID = 80) 
+  in Modell 999999_ARDUINO_UNO_1 verweist auf:
+
+KE-Nummer 6 (KOMPONENTE, ID = 48) 
+  in Modell 230114_PCB_WITH_ARDUUNO - Kreis geschlossen.
+
+
+   Schleife Nr. 3
+
+   Schleifentiefe beträgt 4
+
+KE-Nummer 6 (KOMPONENTE, ID = 48) 
+  in Modell 230114_PCB_WITH_ARDUUNO verweist auf:
+
+KE-Nummer 48 (KOMPONENTE, ID = 111) 
+  in Modell 999999_ARDUINO_UNO_1 muss folgen nach:
+
+KE-Nummer 28 (KOMPONENTE, ID = 80) 
+  in Modell 999999_ARDUINO_UNO_1 verweist auf:
+
+KE-Nummer 6 (KOMPONENTE, ID = 48) 
+  in Modell 230114_PCB_WITH_ARDUUNO - Kreis geschlossen.
 
