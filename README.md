@@ -15,8 +15,13 @@ Here we design the idea for one of our school projects, a solartracker.
 
 
 ### TODO
+- Add Imbuss-Wormscrew to asm
+- Arduino Program turn 180° on Servo max Value
+- Debug Arduino Program (correct Movement based on LDRs)
+- Smooth movement when controlling with Poti
+- Add Setup Text on Display
+- HTL Logo on Program Setup(?)
 - ~~Add Logos~~
-- Add Imbuss-Wormscrew to asm  
 - ~~Add Poti~~
 - ~~Imbuss-Wormscrew for Locking Ring~~
 - ~~Mounting points for Cables~~
