@@ -21,6 +21,7 @@ Here we design the idea for one of our school projects, a solartracker.
 - Smooth movement when controlling with Poti
 - Add Setup Text on Display
 - HTL Logo on Program Setup(?)
+- List Ideas for Video Script
 - ~~Add Logos~~
 - ~~Add Poti~~
 - ~~Imbuss-Wormscrew for Locking Ring~~
