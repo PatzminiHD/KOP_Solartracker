@@ -1,0 +1,30 @@
+-Vorstellen der Projektaufgabe(pdf)
+	-Ziele
+	-Zeitplan
+	-....
+
+-Vorstellen der eigenen Idee
+	-Konstruktionsansatz
+	-Designidee
+	-aufgetretene Probleme
+	-(3D Print Timelapse)
+
+-Elektroaufbau
+	-Komponenten
+	-Aufbau
+	-Platine
+
+-Programm	
+	-Programmablauf
+	-Features erklären
+
+-Zusammenbau
+	-Zusammenfügen der einzelnen Teile (Video)
+	-Aufgetretene Fehler
+	-Stückliste/Kostenaufschlüsselung
+
+-Feintuning
+	-Probleme-> Lösungsansatz
+
+-Funktionsclip
+	
