@@ -1,0 +1,28 @@
+-Present the project specifications
+    -goals
+    -timeplan
+
+-Present our own idea
+    -construction approach
+    -design idea
+    -encountered problems
+
+-Electronic features
+    -components
+    -construction
+    -PCB
+
+-Arduino Program
+    -program Flow Chart
+    -show features
+
+-Assembly
+    -assembling of single parts
+    -encountered problems
+    -parts list
+    -costs list
+
+-Finetuning
+    -problems -> solving approach
+
+-Videoclip of Solartracker working
