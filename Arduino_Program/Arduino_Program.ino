@@ -159,13 +159,6 @@ void loop() {
   }
   prevButton = currButton;
 
-  //Wait if performing full turn
-  if(performFullTurn)
-  {
-    performFullTurn = false;
-    delay(1000);
-  }
-
   //Execute Depending on Mode
   switch (Mode)
   {
