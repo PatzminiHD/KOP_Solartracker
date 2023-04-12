@@ -8,53 +8,56 @@ Servo ServoUpper;
 Servo ServoLower;
 
 //Servo Pins on Arduino
-const int ServoUpperPin = 6;
-const int ServoLowerPin = 5;
+const byte ServoUpperPin = 6;
+const byte ServoLowerPin = 5;
 
 //Global Servo Values
-int ServoUpperValue = 0;
-int ServoLowerValue = 0;
+int16_t ServoUpperValue = 0;
+int16_t ServoLowerValue = 0;
 
 //Global Mode Value
 //Mode 0 = Off
 //Mode 1 = Auto
 //Mode 2 = Manual Lower
 //Mode 3 = Manual Upper
-int Mode = 0;
+byte Mode = 0;
 
 //Maximum and Minimum Values for the Servos
-const int ServoUpperMaxValue = 160;
-const int ServoUpperMinValue = 30;
-const int ServoLowerMaxValue = 180;
-const int ServoLowerMinValue = 0;
+const byte ServoUpperMaxValue = 160;
+const byte ServoUpperMinValue = 30;
+const byte ServoLowerMaxValue = 180;
+const byte ServoLowerMinValue = 0;
 
 //Chip Select Pin for the ADC
-const int MCP3008_cs = 10;
+const byte MCP3008_cs = 10;
 
 //Mode Button Pin on Arduino
-const int ModeButton = 8;
+const byte ModeButton = 8;
 
 //Solar Voltage Pin on the ADC
-const int VsolarPin = 4;
+const byte VsolarPin = 4;
 
 //Potentiometer Pin on the ADC
-const int PotiPin = 5;
+const byte PotiPin = 5;
 
 //Light Depending Resistor Pins on the ADC
-const int LCR0Pin = 0;
-const int LCR1Pin = 1;
-const int LCR2Pin = 2;
-const int LCR3Pin = 3;
+const byte LCR0Pin = 0;
+const byte LCR1Pin = 1;
+const byte LCR2Pin = 2;
+const byte LCR3Pin = 3;
 
 //Threshold Value for Automatic Mode
-const int ThresholdValue = 20;
+const byte ThresholdValue = 20;
 
 //Servo Steps for Automatic Mode
-const int ServoSteps = 1;
-const int ServoFullTurnDelay = 22;
+const byte ServoSteps = 1;
+const byte ServoFullTurnDelay = 22;
 
-bool prevButton = false;
-bool currButton = false;
+//Variable for Button States,
+//Bit 0...Current Button State
+//Bit 1...Previous Button State
+byte buttonStates = 0;
+
 
 
 //==========|Custom Characters|==========
@@ -147,8 +150,8 @@ void setup() {
 //==========|Setup Method|==========
 void loop() {
   //Check if Button is Pressed
-  currButton = digitalRead(ModeButton);
-  if (currButton == false && prevButton == true)
+  bitWrite(buttonStates, 0, digitalRead(ModeButton));
+  if (bitRead(buttonStates, 0) == 0 && bitRead(buttonStates, 1) == 1)
   {
     Mode++;
 
@@ -157,7 +160,7 @@ void loop() {
       Mode = 0;
     }
   }
-  prevButton = currButton;
+  bitWrite(buttonStates, 0, bitRead(buttonStates, 1));
 
   //Execute Depending on Mode
   switch (Mode)
