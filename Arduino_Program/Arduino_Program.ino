@@ -51,6 +51,7 @@ const int ThresholdValue = 20;
 
 //Servo Steps for Automatic Mode
 const int ServoSteps = 1;
+const int ServoFullTurnDelay = 22;
 
 bool prevButton = false;
 bool currButton = false;
@@ -158,6 +159,13 @@ void loop() {
   }
   prevButton = currButton;
 
+  //Wait if performing full turn
+  if(performFullTurn)
+  {
+    performFullTurn = false;
+    delay(1000);
+  }
+
   //Execute Depending on Mode
   switch (Mode)
   {
@@ -223,6 +231,26 @@ void ModeAuto()
     else if(LDR3Value - ThresholdValue > LDR1Value)
     {
       ServoUpperValue -= ServoSteps;
+    }
+
+    //Turn 360° if LowerServo is at its boundary values
+    if(ServoLowerValue > ServoLowerMaxValue)
+    {
+      for(byte i = ServoLowerValue; i > ServoLowerMinValue; i--)
+      {
+        ServoLower.write(i);
+        delay(ServoFullTurnDelay);
+      }
+      ServoLowerValue = ServoLowerMinValue;
+    }
+    else if(ServoLowerValue < ServoLowerMinValue)
+    {
+      for(byte i = ServoLowerValue; i < ServoLowerMaxValue; i++)
+      {
+        ServoLower.write(i);
+        delay(ServoFullTurnDelay);
+      }
+      ServoLowerValue = ServoLowerMaxValue;
     }
 }
 
