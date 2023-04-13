@@ -23,8 +23,8 @@ int16_t ServoLowerValue = 0;
 byte Mode = 0;
 
 //Maximum and Minimum Values for the Servos
-const byte ServoUpperMaxValue = 160;
-const byte ServoUpperMinValue = 30;
+const byte ServoUpperMaxValue = 130;
+const byte ServoUpperMinValue = 40;
 const byte ServoLowerMaxValue = 180;
 const byte ServoLowerMinValue = 0;
 
@@ -50,7 +50,7 @@ const byte LCR3Pin = 3;
 const byte ThresholdValue = 20;
 
 //Servo Steps for Automatic Mode
-const byte ServoSteps = 1;
+const byte ServoSteps = 2;
 const byte ServoFullTurnDelay = 22;
 
 //Variable for Button States,
@@ -160,7 +160,9 @@ void loop() {
       Mode = 0;
     }
   }
-  bitWrite(buttonStates, 0, bitRead(buttonStates, 1));
+  bitWrite(buttonStates, 1, bitRead(buttonStates, 0));
+
+  
 
   //Execute Depending on Mode
   switch (Mode)
@@ -212,11 +214,11 @@ void ModeAuto()
     //Compare LDR Values for Upper Servo
     if(LDR0Value - ThresholdValue > LDR2Value)
     {
-      ServoUpperValue += ServoSteps;
+      ServoUpperValue -= ServoSteps;
     }
     else if(LDR2Value - ThresholdValue > LDR0Value)
     {
-      ServoUpperValue -= ServoSteps;
+      ServoUpperValue += ServoSteps;
     }
 
     //Compare LDR Values for Lower Servo
@@ -330,8 +332,6 @@ void SetServos()
 //Read analog value from ADC (MCP3008)
 uint16_t mcp3008_read(uint8_t channel) {
   //Set ChipSelect LOW
-  Serial.print("Reading Pin: ");
-  Serial.println(channel);
   digitalWrite(MCP3008_cs, LOW);
 
   //Start SPI Transfer
@@ -340,11 +340,6 @@ uint16_t mcp3008_read(uint8_t channel) {
   //Transfer Value
   uint8_t msb = SPI.transfer(0x80 + (channel << 4));
   uint8_t lsb = SPI.transfer(0x00);
-
-  Serial.print("MSB is: ");
-  Serial.println(msb);
-  Serial.print("LSB is: ");
-  Serial.println(lsb);
   //Set ChipSelect HIGH
   digitalWrite(MCP3008_cs, HIGH);
 
