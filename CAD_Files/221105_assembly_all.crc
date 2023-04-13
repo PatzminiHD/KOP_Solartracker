@@ -1,56 +1,56 @@
-﻿  Modell 221105_ASSEMBLY_ALL: 
+﻿  MODEL 221105_ASSEMBLY_ALL :
  
 
-  3 Zirkulärer-Bezug-Schleifen gefunden
+  3 CIRCULAR REFERENCE LOOPS FOUND
  
 
-   Schleife Nr. 1
+   LOOP #  1
 
-   Schleifentiefe beträgt 4
+   Depth of loop is 4
 
-KE-Nummer 6 (KOMPONENTE, ID = 48) 
-  in Modell 230114_PCB_WITH_ARDUUNO verweist auf:
+Feature number 6 (COMPONENT, id = 48) 
+  in model 230114_PCB_WITH_ARDUUNO refers to:
 
-KE-Nummer 30 (KOMPONENTE, ID = 84) 
-  in Modell 999999_ARDUINO_UNO_1 muss folgen nach:
+Feature number 30 (COMPONENT, id = 84) 
+  in model 999999_ARDUINO_UNO_1 must follow after:
 
-KE-Nummer 28 (KOMPONENTE, ID = 80) 
-  in Modell 999999_ARDUINO_UNO_1 verweist auf:
+Feature number 28 (COMPONENT, id = 80) 
+  in model 999999_ARDUINO_UNO_1 refers to:
 
-KE-Nummer 6 (KOMPONENTE, ID = 48) 
-  in Modell 230114_PCB_WITH_ARDUUNO - Kreis geschlossen.
-
-
-   Schleife Nr. 2
-
-   Schleifentiefe beträgt 4
-
-KE-Nummer 6 (KOMPONENTE, ID = 48) 
-  in Modell 230114_PCB_WITH_ARDUUNO verweist auf:
-
-KE-Nummer 47 (KOMPONENTE, ID = 109) 
-  in Modell 999999_ARDUINO_UNO_1 muss folgen nach:
-
-KE-Nummer 28 (KOMPONENTE, ID = 80) 
-  in Modell 999999_ARDUINO_UNO_1 verweist auf:
-
-KE-Nummer 6 (KOMPONENTE, ID = 48) 
-  in Modell 230114_PCB_WITH_ARDUUNO - Kreis geschlossen.
+Feature number 6 (COMPONENT, id = 48) 
+  in model 230114_PCB_WITH_ARDUUNO - circle closed.
 
 
-   Schleife Nr. 3
+   LOOP #  2
 
-   Schleifentiefe beträgt 4
+   Depth of loop is 4
 
-KE-Nummer 6 (KOMPONENTE, ID = 48) 
-  in Modell 230114_PCB_WITH_ARDUUNO verweist auf:
+Feature number 6 (COMPONENT, id = 48) 
+  in model 230114_PCB_WITH_ARDUUNO refers to:
 
-KE-Nummer 48 (KOMPONENTE, ID = 111) 
-  in Modell 999999_ARDUINO_UNO_1 muss folgen nach:
+Feature number 47 (COMPONENT, id = 109) 
+  in model 999999_ARDUINO_UNO_1 must follow after:
 
-KE-Nummer 28 (KOMPONENTE, ID = 80) 
-  in Modell 999999_ARDUINO_UNO_1 verweist auf:
+Feature number 28 (COMPONENT, id = 80) 
+  in model 999999_ARDUINO_UNO_1 refers to:
 
-KE-Nummer 6 (KOMPONENTE, ID = 48) 
-  in Modell 230114_PCB_WITH_ARDUUNO - Kreis geschlossen.
+Feature number 6 (COMPONENT, id = 48) 
+  in model 230114_PCB_WITH_ARDUUNO - circle closed.
+
+
+   LOOP #  3
+
+   Depth of loop is 4
+
+Feature number 6 (COMPONENT, id = 48) 
+  in model 230114_PCB_WITH_ARDUUNO refers to:
+
+Feature number 48 (COMPONENT, id = 111) 
+  in model 999999_ARDUINO_UNO_1 must follow after:
+
+Feature number 28 (COMPONENT, id = 80) 
+  in model 999999_ARDUINO_UNO_1 refers to:
+
+Feature number 6 (COMPONENT, id = 48) 
+  in model 230114_PCB_WITH_ARDUUNO - circle closed.
 
