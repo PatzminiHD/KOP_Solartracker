@@ -210,10 +210,6 @@ void ModeAuto()
     int LDR1Value = mcp3008_read(LCR1Pin);
     int LDR2Value = mcp3008_read(LCR2Pin);
     int LDR3Value = mcp3008_read(LCR3Pin);
-
-    Serial.print(LDR1Value);
-    Serial.print("\t");
-    Serial.print(LDR3Value);
     
     //Compare LDR Values for Upper Servo
     if(LDR0Value - ThresholdValue > LDR2Value)
@@ -229,12 +225,10 @@ void ModeAuto()
     if(LDR1Value - ThresholdValue > LDR3Value)
     {
       ServoLowerValue += ServoSteps;
-      Serial.println(">");
     }
     else if(LDR3Value - ThresholdValue > LDR1Value)
     {
       ServoLowerValue -= ServoSteps;
-      Serial.println("<");
     }
 
     //Turn 360° if LowerServo is at its boundary values
