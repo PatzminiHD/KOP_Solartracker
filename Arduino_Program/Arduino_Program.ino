@@ -47,11 +47,11 @@ const byte LCR2Pin = 2;
 const byte LCR3Pin = 3;
 
 //Threshold Value for Automatic Mode
-const byte ThresholdValue = 20;
+const byte ThresholdValue = 35;
 
 //Servo Steps for Automatic Mode
 const byte ServoSteps = 2;
-const byte ServoFullTurnDelay = 22;
+const byte ServoFullTurnDelay = 2;
 
 //Variable for Button States,
 //Bit 0...Current Button State
