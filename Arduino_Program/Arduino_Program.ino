@@ -233,7 +233,7 @@ void ModeAuto()
     }
     else if(LDR3Value - ThresholdValue > LDR1Value)
     {
-      ServoUpperValue -= ServoSteps;
+      ServoLowerValue -= ServoSteps;
       Serial.println("<");
     }
 
