@@ -234,7 +234,7 @@ void ModeAuto()
     //Turn 360° if LowerServo is at its boundary values
     if(ServoLowerValue > ServoLowerMaxValue)
     {
-      for(byte i = ServoLowerValue; i > ServoLowerMinValue; i--)
+      for(int i = ServoLowerValue; i > ServoLowerMinValue; i--)
       {
         ServoLower.write(i);
         delay(ServoFullTurnDelay);
@@ -243,7 +243,7 @@ void ModeAuto()
     }
     else if(ServoLowerValue < ServoLowerMinValue)
     {
-      for(byte i = ServoLowerValue; i < ServoLowerMaxValue; i++)
+      for(int i = ServoLowerValue; i < ServoLowerMaxValue; i++)
       {
         ServoLower.write(i);
         delay(ServoFullTurnDelay);
