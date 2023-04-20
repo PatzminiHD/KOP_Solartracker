@@ -61,7 +61,8 @@ byte buttonStates = 0;
 
 
 //==========|Custom Characters|==========
-byte ModeOffChar[] = {
+//Save custom characters to program memory to save dynamic memory
+const byte ModeOffChar[] PROGMEM = {
   B01110,
   B10001,
   B10001,
@@ -71,7 +72,7 @@ byte ModeOffChar[] = {
   B10001,
   B01110
 };
-byte ModeLowerChar[] = {
+const byte ModeLowerChar[] PROGMEM = {
   B00100,
   B00100,
   B00100,
@@ -81,7 +82,7 @@ byte ModeLowerChar[] = {
   B00000,
   B00000
 };
-byte ModeUpperChar[] = {
+const byte ModeUpperChar[] PROGMEM = {
   B00000,
   B00000,
   B00100,
@@ -91,7 +92,7 @@ byte ModeUpperChar[] = {
   B00100,
   B00100
 };
-byte ModeAutoChar[] = {
+const byte ModeAutoChar[] PROGMEM = {
   B00000,
   B01110,
   B10001,
@@ -102,7 +103,7 @@ byte ModeAutoChar[] = {
   B10001
 };
 
-byte degree[] = {
+const byte degree[] PROGMEM = {
   B01100,
   B10010,
   B10010,
