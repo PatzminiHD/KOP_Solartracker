@@ -8,8 +8,8 @@ Servo ServoUpper;
 Servo ServoLower;
 
 //Servo Pins on Arduino
-const byte ServoUpperPin = 6;
-const byte ServoLowerPin = 5;
+const byte ServoUpperPin PROGMEM = 6;
+const byte ServoLowerPin PROGMEM = 5;
 
 //Global Servo Values
 int16_t ServoUpperValue = 0;
@@ -23,35 +23,35 @@ int16_t ServoLowerValue = 0;
 byte Mode = 0;
 
 //Maximum and Minimum Values for the Servos
-const byte ServoUpperMaxValue = 130;
-const byte ServoUpperMinValue = 40;
-const byte ServoLowerMaxValue = 180;
-const byte ServoLowerMinValue = 0;
+const byte ServoUpperMaxValue PROGMEM = 130;
+const byte ServoUpperMinValue PROGMEM = 40;
+const byte ServoLowerMaxValue PROGMEM = 180;
+const byte ServoLowerMinValue PROGMEM = 0;
 
 //Chip Select Pin for the ADC
-const byte MCP3008_cs = 10;
+const byte MCP3008_cs PROGMEM = 10;
 
 //Mode Button Pin on Arduino
-const byte ModeButton = 8;
+const byte ModeButton PROGMEM = 8;
 
 //Solar Voltage Pin on the ADC
-const byte VsolarPin = 4;
+const byte VsolarPin PROGMEM = 4;
 
 //Potentiometer Pin on the ADC
-const byte PotiPin = 5;
+const byte PotiPin PROGMEM = 5;
 
 //Light Depending Resistor Pins on the ADC
-const byte LCR0Pin = 0;
-const byte LCR1Pin = 1;
-const byte LCR2Pin = 2;
-const byte LCR3Pin = 3;
+const byte LCR0Pin PROGMEM = 0;
+const byte LCR1Pin PROGMEM = 1;
+const byte LCR2Pin PROGMEM = 2;
+const byte LCR3Pin PROGMEM = 3;
 
 //Threshold Value for Automatic Mode
-const byte ThresholdValue = 35;
+const byte ThresholdValue PROGMEM = 35;
 
 //Servo Steps for Automatic Mode
-const byte ServoSteps = 2;
-const byte ServoFullTurnDelay = 2;
+const byte ServoSteps PROGMEM = 2;
+const byte ServoFullTurnDelay PROGMEM = 2;
 
 //Variable for Button States,
 //Bit 0...Current Button State
