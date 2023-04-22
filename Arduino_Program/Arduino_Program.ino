@@ -8,8 +8,8 @@ Servo ServoUpper;
 Servo ServoLower;
 
 //Servo Pins on Arduino
-const byte ServoUpperPin PROGMEM = 6;
-const byte ServoLowerPin PROGMEM = 5;
+const byte ServoUpperPin = 6;
+const byte ServoLowerPin = 5;
 
 //Global Servo Values
 int16_t ServoUpperValue = 0;
@@ -23,35 +23,35 @@ int16_t ServoLowerValue = 0;
 byte Mode = 0;
 
 //Maximum and Minimum Values for the Servos
-const byte ServoUpperMaxValue PROGMEM = 130;
-const byte ServoUpperMinValue PROGMEM = 40;
-const byte ServoLowerMaxValue PROGMEM = 180;
-const byte ServoLowerMinValue PROGMEM = 0;
+const byte ServoUpperMaxValue = 130;
+const byte ServoUpperMinValue = 50;
+const byte ServoLowerMaxValue = 180;
+const byte ServoLowerMinValue = 0;
 
 //Chip Select Pin for the ADC
-const byte MCP3008_cs PROGMEM = 10;
+const byte MCP3008_cs = 10;
 
 //Mode Button Pin on Arduino
-const byte ModeButton PROGMEM = 8;
+const byte ModeButton = 8;
 
 //Solar Voltage Pin on the ADC
-const byte VsolarPin PROGMEM = 4;
+const byte VsolarPin = 4;
 
 //Potentiometer Pin on the ADC
-const byte PotiPin PROGMEM = 5;
+const byte PotiPin = 5;
 
 //Light Depending Resistor Pins on the ADC
-const byte LCR0Pin PROGMEM = 0;
-const byte LCR1Pin PROGMEM = 1;
-const byte LCR2Pin PROGMEM = 2;
-const byte LCR3Pin PROGMEM = 3;
+const byte LCR0Pin = 0;
+const byte LCR1Pin = 1;
+const byte LCR2Pin = 2;
+const byte LCR3Pin = 3;
 
 //Threshold Value for Automatic Mode
-const byte ThresholdValue PROGMEM = 35;
+const byte ThresholdValue = 35;
 
 //Servo Steps for Automatic Mode
-const byte ServoSteps PROGMEM = 2;
-const byte ServoFullTurnDelay PROGMEM = 2;
+const byte ServoSteps = 2;
+const byte ServoFullTurnDelay = 2;
 
 //Variable for Button States,
 //Bit 0...Current Button State
@@ -62,7 +62,7 @@ byte buttonStates = 0;
 
 //==========|Custom Characters|==========
 //Save custom characters to program memory to save dynamic memory
-const byte ModeOffChar[] PROGMEM = {
+const byte ModeOffChar[] = {
   B01110,
   B10001,
   B10001,
@@ -72,7 +72,7 @@ const byte ModeOffChar[] PROGMEM = {
   B10001,
   B01110
 };
-const byte ModeLowerChar[] PROGMEM = {
+const byte ModeLowerChar[] = {
   B00100,
   B00100,
   B00100,
@@ -82,7 +82,7 @@ const byte ModeLowerChar[] PROGMEM = {
   B00000,
   B00000
 };
-const byte ModeUpperChar[] PROGMEM = {
+const byte ModeUpperChar[] = {
   B00000,
   B00000,
   B00100,
@@ -92,7 +92,7 @@ const byte ModeUpperChar[] PROGMEM = {
   B00100,
   B00100
 };
-const byte ModeAutoChar[] PROGMEM = {
+const byte ModeAutoChar[] = {
   B00000,
   B01110,
   B10001,
@@ -103,7 +103,7 @@ const byte ModeAutoChar[] PROGMEM = {
   B10001
 };
 
-const byte degree[] PROGMEM = {
+const byte degree[] = {
   B01100,
   B10010,
   B10010,
@@ -215,11 +215,11 @@ void ModeAuto()
     //Compare LDR Values for Upper Servo
     if(LDR0Value - ThresholdValue > LDR2Value)
     {
-      ServoUpperValue -= ServoSteps;
+      ServoUpperValue += ServoSteps;
     }
     else if(LDR2Value - ThresholdValue > LDR0Value)
     {
-      ServoUpperValue += ServoSteps;
+      ServoUpperValue -= ServoSteps;
     }
 
     //Compare LDR Values for Lower Servo
