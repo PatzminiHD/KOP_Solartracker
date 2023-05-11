@@ -259,7 +259,7 @@ void ModeManLower()
   //Read Potentiometer Value
   int PotiValue = mcp3008_read(PotiPin);
   //Set Servo according to Potentiometer Value
-  ServoLowerValue = map(PotiValue, 0, 1023, 0, 180);
+  ServoLowerValue = map(PotiValue, 0, 1023, ServoLowerMinValue, ServoLowerMaxValue);
 }
 
 //==========|Mode Manual Upper Servo Method|==========
@@ -268,7 +268,7 @@ void ModeManUpper()
   //Read Potentiometer Value
   int PotiValue = mcp3008_read(PotiPin);
   //Set Servo according to Potentiometer Value
-  ServoUpperValue = map(PotiValue, 0, 1023, 0, 180);
+  ServoUpperValue = map(PotiValue, 0, 1023, ServoUpperMinValue, ServoUpperMinValue);
 }
 
 //==========|Write Info to LCD Method|==========
