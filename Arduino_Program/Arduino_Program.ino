@@ -1,7 +1,9 @@
 #include <SPI.h>
 #include <Servo.h>
 #include <LiquidCrystal_I2C.h>
-LiquidCrystal_I2C lcd(0x27, 20, 4);
+#include "Arduino_Breakout.h"
+#include "Arduino_Bird.h"
+LiquidCrystal_I2C lcd(0x27, 20, 4); 
 
 //Initialise Servos
 Servo ServoUpper;
