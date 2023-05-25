@@ -60,6 +60,9 @@ const byte ServoFullTurnDelay = 2;
 //Bit 1...Previous Button State
 byte buttonStates = 0;
 
+//Save the last time the button was pressed
+unsigned long lastButtonPressMillis = 0;
+
 
 
 //==========|Custom Characters|==========
@@ -144,6 +147,7 @@ void setup() {
   //Create Custom Characters
   CreateCustomChars();
 
+  lastButtonPressMillis = millis();
 }
 
 //==========|Setup Method|==========
@@ -153,11 +157,27 @@ void loop() {
   if (bitRead(buttonStates, 0) == 0 && bitRead(buttonStates, 1) == 1)
   {
     Mode++;
-
     if (Mode > 3)
     {
       Mode = 0;
     }
+
+    lastButtonPressMillis = millis();
+  }
+
+  if (bitRead(buttonStates, 0) == 1 && bitRead(buttonStates, 1) == 0)
+  {
+    if(millis() - lastButtonPressMillis > 7000)
+    {
+      Breakout();
+      CreateCustomChars();
+    }
+    else if(millis() - lastButtonPressMillis > 3000)
+    {
+      Bird();
+      CreateCustomChars();
+    }
+
   }
   bitWrite(buttonStates, 1, bitRead(buttonStates, 0));
 
