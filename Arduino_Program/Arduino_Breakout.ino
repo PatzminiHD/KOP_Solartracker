@@ -419,10 +419,12 @@ void Breakout()
 
   //Reset Custom Chars
   lcd.createChar(4, degree);
-  while(true)
-  {
-    //Do nothing    
-  }
+
+  //Wait for button to be pressed and released
+  while(digitalRead(ModeButton)) {}
+  while(!digitalRead(ModeButton)) {}
+
+  lcd.clear();
 }
 void Breakout_InitCustomCharsWithBar()
 {

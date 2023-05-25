@@ -281,8 +281,11 @@ void Bird()
   lcd.setCursor(5, 1);
   lcd.print(F("Score: "));
   lcd.print(Bird_Score);
+
   while(digitalRead(ModeButton)) {}
   while(!digitalRead(ModeButton)) {}
+  
+  lcd.clear();
 
 }
 

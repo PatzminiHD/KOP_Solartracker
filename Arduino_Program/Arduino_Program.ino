@@ -3,7 +3,7 @@
 #include <LiquidCrystal_I2C.h>
 #include "Arduino_Breakout.h"
 #include "Arduino_Bird.h"
-LiquidCrystal_I2C lcd(0x27, 20, 4); 
+LiquidCrystal_I2C lcd(0x27, 20, 4);
 
 //Initialise Servos
 Servo ServoUpper;
@@ -142,11 +142,7 @@ void setup() {
   digitalWrite(MCP3008_cs, HIGH);
 
   //Create Custom Characters
-  lcd.createChar(0, ModeOffChar);
-  lcd.createChar(1, ModeAutoChar);
-  lcd.createChar(2, ModeLowerChar);
-  lcd.createChar(3, ModeUpperChar);
-  lcd.createChar(4, degree);
+  CreateCustomChars();
 
 }
 
@@ -346,10 +342,15 @@ uint16_t mcp3008_read(uint8_t channel) {
   //Set ChipSelect HIGH
   digitalWrite(MCP3008_cs, HIGH);
 
-  //Return read value
-  return ((msb & 0x03) << 8) + lsb;
-}
+  uint16_t out = ((msb & 0x03) << 8) + lsb;
+  
+  //Fix the value that is read, because for some reason it is too low
+  //We don't know why it is too low, we just know it is
+  out = map(out, 0, 920, 0, 1023);
 
+  //Return read value
+  return out;
+}
 
 //==========|Write Mode to LCD Method|==========
 void WriteModeToLCD()
@@ -374,4 +375,13 @@ void WriteModeToLCD()
       lcd.write(3);
       break;
   }
+}
+
+void CreateCustomChars()
+{
+  lcd.createChar(0, ModeOffChar);
+  lcd.createChar(1, ModeAutoChar);
+  lcd.createChar(2, ModeLowerChar);
+  lcd.createChar(3, ModeUpperChar);
+  lcd.createChar(4, degree);
 }
