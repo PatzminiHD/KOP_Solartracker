@@ -1,17 +1,16 @@
 Bilder: 	Alle Bilder HQ
--Gesamtaufnahmen
--Abnehmbare Platte
--Innenleben Gearbox / eventuell Arduinoseitig
--Aux Anschluss
--Display + Button
--Poti
--LCD support / Lagerung / allgemein oberer Aufbau
+-Gesamtaufnahmen --
+-Abnehmbare Platte --
+-Innenleben Gearbox / eventuell Arduinoseitig --
+-Aux Anschluss --
+-Display + Button --
+-Poti --
+-LCD support / Lagerung / allgemein oberer Aufbau --
 
--PSU 
--off		-on
--Front	-Front
--Back		-Back
--Inner
+-PSU	
+-Front --
+-Back --
+-Inner --
 
 
 
@@ -26,6 +25,5 @@ Videoaufnahmen:
 
 -Netzteil Rundumaufnahmen
 -Netzteil Aufnahme beim Einschalten
-
 
 -Aufnahme 3D-Druck
