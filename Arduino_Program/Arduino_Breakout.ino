@@ -116,19 +116,20 @@ void Breakout()
 
   lcd.clear();
 
+  //Initialise random seed
   randomSeed(analogRead(A0));
 
-  byte prevBarPos = 0;
-  byte barPos = 0;
-  byte loopCounter = 0;
-  byte Speed = 5; //Speed, must be smaller then 256
-  byte prevBallPosX = 0;
-  byte prevBallPosY = 0;
-  byte BallPosX = random(9, 12);
-  byte BallPosY = 2;
-  byte BallMovement = random(0, 4) * 5 + 2;
-  uint16_t Score = 0;
-  int64_t bricks = 1099511627775; //Each brick represents a bit in this int
+  byte prevBarPos = 0;                      //Helper variable, previous bar Position
+  byte barPos = 0;                          //Horiontal bar position
+  byte loopCounter = 0;                     //Loop counter
+  byte Speed = 5;                           //Speed, must be smaller then 256
+  byte prevBallPosX = 0;                    //Helper variable, previous ball X Position
+  byte prevBallPosY = 0;                    //Helper variable, previous ball X Position
+  byte BallPosX = random(9, 12);            //Set the starting X Position to a random Position
+  byte BallPosY = 2;                        //Set the starting Y Position
+  byte BallMovement = random(0, 4) * 5 + 2; //Set the ballmovement to a random value
+  uint16_t Score = 0;                       //Score
+  int64_t bricks = 1099511627775;           //Each brick represents a bit in this int
   /* //Movement + in Cell Pos
    * 0 - 4 = LeftUpwards Movement
    * 5 - 9 = RightUpwards Movement
@@ -181,6 +182,7 @@ void Breakout()
 
       //Redraw at new Pos
       lcd.setCursor(barPos, 3);
+
       //Print Bar
       if(barPos == BallPosX && BallPosY == 3)
       {
@@ -204,6 +206,7 @@ void Breakout()
       loopCounter = 0;
       
       //Ugly Ass Big Switch Case
+      //Update Ball Position and Ball Movement for next loop based on current Ball Movement
       switch(BallMovement)
       {
         case 0:
@@ -403,6 +406,7 @@ void Breakout()
       lcd.setCursor(BallPosX, BallPosY);
       lcd.write((BallMovement % 5) + 4);
     }
+    //Increment loop counter
     loopCounter++;
 
     //Break out of loop if all bricks are cleared
@@ -411,6 +415,7 @@ void Breakout()
       break;
     }
   }
+  //Print score
   lcd.setCursor(3, 1);
   lcd.print(F("You're Winner!"));
   lcd.setCursor(4, 2);
@@ -419,11 +424,15 @@ void Breakout()
 
   //Reset Custom Chars
   lcd.createChar(4, degree);
-  while(true)
-  {
-    //Do nothing    
-  }
+
+  //Wait for button to be pressed and released
+  while(digitalRead(ModeButton)) {}
+  while(!digitalRead(ModeButton)) {}
+
+  lcd.clear();
 }
+
+//==========|Initialise Custom Characters with Bar|==========
 void Breakout_InitCustomCharsWithBar()
 {
   lcd.createChar(4, LeftUpperWithBar);
@@ -433,6 +442,7 @@ void Breakout_InitCustomCharsWithBar()
   lcd.createChar(8, RightLowerWithBar);
 }
 
+//==========|Initialise Custom Characters|==========
 void Breakout_InitCustomChars()
 {
   lcd.createChar(4, LeftUpper);
@@ -442,6 +452,7 @@ void Breakout_InitCustomChars()
   lcd.createChar(8, RightLower);
 }
 
+//==========|Deflect the ball when a brick was hit|==========
 byte Breakout_DeflectBallOnBrickHit(byte BallMovement, byte BallPosX, byte BallPosY)
 {
   lcd.setCursor(BallPosX, BallPosY);
@@ -456,6 +467,7 @@ byte Breakout_DeflectBallOnBrickHit(byte BallMovement, byte BallPosX, byte BallP
   }
 }
 
+//==========|Draw the bricks|==========
 void Breakout_DrawBricks(int64_t bricks)
 {
   lcd.setCursor(0, 0);
