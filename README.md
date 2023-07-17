@@ -1,6 +1,9 @@
 # Solartracker
 
 Here we design the idea for one of our school projects, a solartracker.
+This repository is now archived as the project is finished.
+The presentation can be found [here](https://github.com/PatzminiHD/KOP_Solartracker/tree/main/Presentation), and the video [here](https://youtu.be/DB9Xd0maCpQ).
+
 
 ### Given Requirements:
 - It should have 2 axes to follow the position of the sun
@@ -15,12 +18,12 @@ Here we design the idea for one of our school projects, a solartracker.
 
 
 ### TODO
-- Add Imbuss-Wormscrew to asm
+- ~~Add Imbuss-Wormscrew to asm~~
 - ~~Arduino Program turn 180° on Servo max Value~~
 - ~~Debug Arduino Program (correct Movement based on LDRs)~~
 - Smooth movement when controlling with Poti
 - ~~Add Setup Text on Display~~
-- HTL Logo on Program Setup(?)
+- ~~HTL Logo on Program Setup(?)~~
 - ~~List Ideas for Video Script~~
 - ~~Add Logos~~
 - ~~Add Poti~~
